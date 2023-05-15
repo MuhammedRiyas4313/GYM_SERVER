@@ -102,25 +102,6 @@ const verifyTrainer = async (req, res) => {
     data: updatedTrainer,
   });
 
-  const mailOptions = {
-    from: "gymtrainersonline@gmail.com", // sender address
-    to: updatedTrainer.email, // list of receivers
-    subject: "GYM Fitness Center Account Verification", // Subject line
-    html: `<p>Hello ${updatedTrainer?.fname},</p>
-
-        <p>We are pleased to inform you that your account has been successfully verified.</p> <p>You can now log in and access all the features and benefits of our platform.</p>
-        
-        <p>Thank you for your patience during the verification process.</p>
-        
-        <p>Best regards,</p>
-        <p>GYM TRAINERS MANAGEMENT TEAM</p>`,
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log("error", error);
-    }
-  });
 };
 
 const clientList = async (req, res) => {
