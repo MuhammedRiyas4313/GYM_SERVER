@@ -4,7 +4,7 @@ function socketConnection(server){
     console.log('socket connection calling')
     const io = new Server(server,{ 
         cors:{
-          origin: 'http://localhost:3000',
+          origin: 'https://master.d3e20f1ck916dk.amplifyapp.com',
           methods:["GET","POST"]
         }
       })
