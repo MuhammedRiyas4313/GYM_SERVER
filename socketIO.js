@@ -19,13 +19,13 @@ function socketConnection(server){
         //socket for chat 
 
         socket.on('setup',(Id)=>{
-          socket.join(Id);
+          socket.join(123);
           console.log('socket join : ',Id)
           socket.emit('connected')
         })
 
         socket.on('send_message',(data)=>{
-          socket.to(data.conversationId).emit('recieve_message',data)
+          socket.to(123).emit('recieve_message',data)
         })
 
 
