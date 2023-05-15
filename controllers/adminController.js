@@ -88,14 +88,12 @@ const trainerDetails = async (req, res) => {
 
 const verifyTrainer = async (req, res) => {
   const { trainerId } = req.query;
-  console.log("verify Trainer........");
   const updatedTrainer = await Trainer.findOneAndUpdate(
     { _id: trainerId },
     { isVerified: true },
     { new: true }
   );
 
-  console.log(updatedTrainer, "vrified trainer");
   const mailOptions = {
     from: "gymtrainersonline@gmail.com", // sender address
     to: updatedTrainer.email, // list of receivers
@@ -113,9 +111,12 @@ const verifyTrainer = async (req, res) => {
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log("error", error);
-      res.json({ status: "Email not send" });
+      res.json({
+        status: "Verification email has been sent",
+        message: `Verification Email has been sent to ${info.accepted[0]} !`,
+        data: updatedTrainer,
+      });
     } else {
-      console.log(info, "info from otpmailer");
       res.json({
         status: "Verification email has been sent",
         message: `Verification Email has been sent to ${info.accepted[0]} !`,
