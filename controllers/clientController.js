@@ -35,6 +35,7 @@ const clientLogin = async (req, res) => {
   console.log("client login calling for sent email.......");
   try {
     const { email, password } = req.body;
+
     const oldUser = await User.findOne({ email });
 
     if (!oldUser) return res.json({ status: "User doesn't exist" });
