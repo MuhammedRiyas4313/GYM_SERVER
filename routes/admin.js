@@ -39,13 +39,13 @@ router.get("/clientdetails",verifyTokenAdmin, clientDetails);
 router.post('/chat',  createConversation);
 router.get('/chat',  getConversation);
 router.get('/chat/user',  getUser);
-router.get('/chat/messages',  getMessages);
-router.post('/chat/message',  createMessage);
+router.get('/chat/messages', getMessages);
+router.post('/chat/message', createMessage);
 router.get('/transactions', verifyTokenAdmin, transactions);
-router.get('/transaction',verifyTokenAdmin,  transaction);
+router.get('/transaction',verifyTokenAdmin, transaction);
 router.get('/transaction/clients', verifyTokenAdmin, transactionClients);
 router.get('/wallet', verifyTokenAdmin, getwallet);
-router.get('/usercount',verifyTokenAdmin,  getUserCount);
-router.get('/presentcount',verifyTokenAdmin,  getPresentCount);
+router.get('/usercount',verifyTokenAdmin, getUserCount);
+router.get('/presentcount',verifyTokenAdmin, getPresentCount);
 
 module.exports = router;
