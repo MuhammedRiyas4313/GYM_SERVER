@@ -107,6 +107,7 @@ const trainerLoginWithGoogle = async (req, res) => {
 
   try {
     const { email, password } = req.body;
+    
     const oldTrainer = await Trainer.findOne({ email });
     console.log(oldTrainer, "oldTrainer.....");
 
