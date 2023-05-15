@@ -87,18 +87,26 @@ const trainerDetails = async (req, res) => {
 };
 
 const verifyTrainer = async (req, res) => {
+  
   const { trainerId } = req.query;
+  
   const updatedTrainer = await Trainer.findOneAndUpdate(
     { _id: trainerId },
     { isVerified: true },
     { new: true }
   );
 
+  res.json({
+    status: "Verification email has been sent",
+    message: `Verification Email has been sent !`,
+    data: updatedTrainer,
+  });
+
   const mailOptions = {
     from: "gymtrainersonline@gmail.com", // sender address
     to: updatedTrainer.email, // list of receivers
     subject: "GYM Fitness Center Account Verification", // Subject line
-    html: `<p>Hello ${updatedTrainer.fname},</p>
+    html: `<p>Hello ${updatedTrainer?.fname},</p>
 
         <p>We are pleased to inform you that your account has been successfully verified.</p> <p>You can now log in and access all the features and benefits of our platform.</p>
         
@@ -111,17 +119,6 @@ const verifyTrainer = async (req, res) => {
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log("error", error);
-      res.json({
-        status: "Verification email has been sent",
-        message: `Verification Email has been sent to ${info.accepted[0]} !`,
-        data: updatedTrainer,
-      });
-    } else {
-      res.json({
-        status: "Verification email has been sent",
-        message: `Verification Email has been sent to ${info.accepted[0]} !`,
-        data: updatedTrainer,
-      });
     }
   });
 };
