@@ -2,8 +2,8 @@ const jwt = require("jsonwebtoken");
 
 const verifyTokenAdmin = async (req, res, next) => {
   try {
-    console.log('admin token = ', token)
     let token = req.headers["authorization"];
+    console.log('admin token = ', token)
     console.log(token,'admin')
     if (!token) {
       return res.status(403).send("Access Denied");
