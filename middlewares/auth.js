@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const verifyTokenAdmin = async (req, res, next) => {
   try {
-    console.log('admin token =', token)
+    console.log('admin token = ', token)
     let token = req.headers["authorization"];
     console.log(token,'admin')
     if (!token) {
@@ -22,6 +22,7 @@ const verifyTokenAdmin = async (req, res, next) => {
       return res.status(403).send("Access Denied");
     }
   } catch (err) {
+    console.log(err.message,'error in auth middleware')
     res.status(500).json({ message: err.message });
   }
 };

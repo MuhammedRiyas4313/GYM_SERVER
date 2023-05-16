@@ -32,7 +32,7 @@ function socketConnection(server){
         // socket for videocall
 
         socket.on('me',(conversation) => {
-          socket.join(1234);
+          socket.join(conversation);
           console.log(conversation,'conversation id joined')
         })
 
@@ -40,13 +40,13 @@ function socketConnection(server){
           socket.broadcast.emit('callended')
         })
         socket.on('callended',(id)=>{
-          socket.broadcast.to(1234).emit('callended',id)
-          socket.leave(1234);
+          socket.broadcast.to(id).emit('callended',id)
+          socket.leave(id);
           console.log(id,'callended')
         })
 
         socket.on('calluser',({ userToCall, from , signalData, name })=>{
-          socket.broadcast.to(1234).emit('calluser',{ signal: signalData, from , name })
+          socket.broadcast.to(userToCall).emit('calluser',{ signal: signalData, from , name })
         })
 
         socket.on('answercall',(data)=>{
