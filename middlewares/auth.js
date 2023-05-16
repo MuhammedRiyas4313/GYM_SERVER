@@ -30,6 +30,7 @@ const verifyTokenAdmin = async (req, res, next) => {
 const verifyTokenClient = async (req, res, next) => {
   try {
     let token = req.headers["authorization"];
+    console.log(token,'client token')
     if (!token) {
       return res.status(403).send("Access Denied");
     }
@@ -53,6 +54,7 @@ const verifyTokenClient = async (req, res, next) => {
 const verifyTokenTrainer = async (req, res, next) => {
   try {
     let token = req.headers["authorization"];
+    console.log(token,'trainer token')
     if (!token) {
       return res.status(403).send("Access Denied");
     }

@@ -142,8 +142,8 @@ const trainerDetails = async (req, res) => {
     const getDetails = await Trainer.findOne({ _id: trainerId });
     res.json(getDetails);
   } catch (error) {
+    console.log(error.message,'error in trainerDetails trainerController');
     res.status(500).json({ message: "Something went wrong" });
-    console.log(error);
   }
 };
 
