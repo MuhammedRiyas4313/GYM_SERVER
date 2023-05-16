@@ -51,7 +51,7 @@ function socketConnection(server){
 
         socket.on('answercall',(data)=>{
           console.log('answercall on')
-          io.to(1234).emit('callaccepted',data.signal)
+          io.to(data.to).emit('callaccepted',data.signal)
         })
 
 

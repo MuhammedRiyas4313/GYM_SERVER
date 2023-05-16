@@ -327,6 +327,7 @@ const trainerDetails = async (req, res) => {
 };
 
 const trainerCourseList = async (req, res) => {
+  
   console.log("ind trainer course list ........");
   try {
     const { trainerId } = req.query;
@@ -343,6 +344,7 @@ const trainerCourseList = async (req, res) => {
 };
 
 const enrollCLient = async (req, res) => {
+
   const today = new Date();
   const currMonth = today.getMonth() + 1;
   const monthName = new Date(Date.UTC(0, currMonth - 1, 1)).toLocaleString(
@@ -352,16 +354,7 @@ const enrollCLient = async (req, res) => {
   const formattedDate = today.toISOString().slice(0, 10);
 
   try {
-    const {
-      weight,
-      height,
-      emergencycontact,
-      slote,
-      healthinfo,
-      clientId,
-      courseId,
-      paymentDetails,
-    } = req.body;
+    const { weight, height, emergencycontact, slote, healthinfo, clientId, courseId, paymentDetails } = req.body;
 
     const course = await Course.findOne({ _id: new ObjectId(courseId) });
 
