@@ -47,6 +47,7 @@ const verifyTokenClient = async (req, res, next) => {
       return res.status(403).send("Access Denied");
     }
   } catch (err) {
+    console.log(err.message,'error in client auth middleware...')
     res.status(500).json({ message: err.message });
   }
 };
@@ -71,6 +72,7 @@ const verifyTokenTrainer = async (req, res, next) => {
       return res.status(403).send("Access Denied");
     }
   } catch (err) {
+    console.log(err.message,'error message in trainer auth middleware')
     res.status(500).json({ message: err.message });
   }
 };
