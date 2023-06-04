@@ -16,9 +16,9 @@ const Transaction = require("../models/transactions");
 const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
-  cloud_name: "ddxqpujjv",
-  api_key: 285814637664696,
-  api_secret: "i8hO5c9YTp17cWXWDIIduZKlx2s",
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
   secure: true,
 });
 
@@ -32,19 +32,7 @@ let transporter = nodemailer.createTransport({
     pass: process.env.NODEMAILER_AUTHER_PASSWORD, // generated ethereal password
   },
 });
-// let transporter = nodemailer.createTransport({
-//   host: "smtp.zoho.com",
-//   service: "Zoho",
-//   port: 25,
-//   secure: false,
-//   auth: {
-//       user: 'some@email.com',
-//       pass: "123456"
-//   },
-//   tls: {
-//       rejectUnauthorized: false
-//   }
-// });
+
 
 const clientLogin = async (req, res) => {
   console.log("client login calling for sent email.......");
