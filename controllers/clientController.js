@@ -23,17 +23,13 @@ cloudinary.config({
 });
 
 let transporter = nodemailer.createTransport({
-  host: process.env.NODEMAILER_HOST,
   service: process.env.NODEMAILER_SERVICE,
-  port: process.env.NODEMAILER_PORT,
   secure: false,
   auth: {
     user: process.env.NODEMAILER_AUTHER, // generated ethereal user
     pass: process.env.NODEMAILER_AUTHER_PASSWORD, // generated ethereal password
   },
-  tls: {
-    rejectUnauthorized: false,
-  },
+ 
 });
 
 
