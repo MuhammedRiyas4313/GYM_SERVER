@@ -24,11 +24,15 @@ cloudinary.config({
 
 let transporter = nodemailer.createTransport({
   host: process.env.NODEMAILER_HOST,
-  port: process.env.NODEMAILER_PORT,
   service: process.env.NODEMAILER_SERVICE,
+  port: process.env.NODEMAILER_PORT,
+  secure: false,
   auth: {
     user: process.env.NODEMAILER_AUTHER, // generated ethereal user
     pass: process.env.NODEMAILER_AUTHER_PASSWORD, // generated ethereal password
+  },
+  tls: {
+    rejectUnauthorized: false,
   },
 });
 
@@ -57,7 +61,12 @@ const clientLogin = async (req, res) => {
         return res.json({ status: "Invalid Credentials" });
 
       const toke = jwt.sign(
-        { name: oldUser.fname, email: oldUser.email, id: oldUser._id, role: "client" },
+        {
+          name: oldUser.fname,
+          email: oldUser.email,
+          id: oldUser._id,
+          role: "client",
+        },
         "ClientTokenSecret",
         { expiresIn: "5h" }
       );
@@ -85,7 +94,12 @@ const clientLoginWithGoogle = async (req, res) => {
         return res.json({ status: "User is blocked" });
 
       const toke = jwt.sign(
-        { name: oldUser.fname, email: oldUser.email, id: oldUser._id ,role: "client" },
+        {
+          name: oldUser.fname,
+          email: oldUser.email,
+          id: oldUser._id,
+          role: "client",
+        },
         "ClientTokenSecret",
         { expiresIn: "5h" }
       );
@@ -101,7 +115,8 @@ const clientLoginWithGoogle = async (req, res) => {
 const clientRegister = async (req, res) => {
   console.log("client register page  calling.......");
 
-  const { fname, dob, gender, email, phone, password, weight, height } = req.body;
+  const { fname, dob, gender, email, phone, password, weight, height } =
+    req.body;
   try {
     const oldUser = await User.findOne({ email });
 
@@ -151,7 +166,7 @@ const sendOtpVerification = async (result, res) => {
     await newOTPVerification.save();
 
     const mailOptions = {
-      from: "gymtrainersonline@gmail.com", // sender address
+      from: process.env.NODEMAILER_AUTHER, // sender address
       to: result.email, // list of receivers
       subject: "GYM Fitness Center Email Verification", // Subject line
       html: `<p>Enter  ${otp}  in the app to verify your email address and complete the sign up</p><p>This OTP <b>expires in 1 hour</b>.</p>`,
@@ -328,7 +343,6 @@ const trainerDetails = async (req, res) => {
 };
 
 const trainerCourseList = async (req, res) => {
-  
   console.log("ind trainer course list ........");
   try {
     const { trainerId } = req.query;
@@ -345,7 +359,6 @@ const trainerCourseList = async (req, res) => {
 };
 
 const enrollCLient = async (req, res) => {
-
   const today = new Date();
   const currMonth = today.getMonth() + 1;
   const monthName = new Date(Date.UTC(0, currMonth - 1, 1)).toLocaleString(
@@ -355,7 +368,16 @@ const enrollCLient = async (req, res) => {
   const formattedDate = today.toISOString().slice(0, 10);
 
   try {
-    const { weight, height, emergencycontact, slote, healthinfo, clientId, courseId, paymentDetails } = req.body;
+    const {
+      weight,
+      height,
+      emergencycontact,
+      slote,
+      healthinfo,
+      clientId,
+      courseId,
+      paymentDetails,
+    } = req.body;
 
     const course = await Course.findOne({ _id: new ObjectId(courseId) });
 
@@ -836,9 +858,9 @@ const attendanceDetails = async (req, res) => {
       { _id: courseId },
       { clients: { $elemMatch: { user: new ObjectId(clientId) } } }
     );
-    const userAttendance = course.clients[0].attendance
-    console.log(userAttendance,'userAttendance')
-    res.json(userAttendance)
+    const userAttendance = course.clients[0].attendance;
+    console.log(userAttendance, "userAttendance");
+    res.json(userAttendance);
   } catch (error) {
     res.json({ status: "something went wrong" });
     console.log(error.message, "error in  attendance details......");
