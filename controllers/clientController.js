@@ -23,7 +23,6 @@ cloudinary.config({
 });
 
 let transporter = nodemailer.createTransport({
-  // true for 465, false for other ports
   host: process.env.NODEMAILER_HOST,
   port: process.env.NODEMAILER_PORT,
   service: process.env.NODEMAILER_SERVICE,
