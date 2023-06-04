@@ -31,11 +31,7 @@ const adminLogin = async (req, res) => {
     if (password !== oldAdmin.password)
       return res.json({ status: "Invalid Credentials" });
 
-    const toke = jwt.sign(
-      { email: oldAdmin.email, id: oldAdmin._id, role: "admin" },
-      "admin_secret",
-      { expiresIn: "5h" }
-    );
+    const toke = jwt.sign({ email: oldAdmin.email, id: oldAdmin._id, role: "admin" },"admin_secret",{ expiresIn: "5h" });
     res
       .status(200)
       .json({ token: toke, status: "Login success", admin: oldAdmin });

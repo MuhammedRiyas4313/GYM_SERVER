@@ -24,12 +24,27 @@ cloudinary.config({
 
 let transporter = nodemailer.createTransport({
   // true for 465, false for other ports
-  service: "gmail",
+  host: process.env.NODEMAILER_HOST,
+  port: process.env.NODEMAILER_PORT,
+  service: process.env.NODEMAILER_SERVICE,
   auth: {
     user: process.env.NODEMAILER_AUTHER, // generated ethereal user
     pass: process.env.NODEMAILER_AUTHER_PASSWORD, // generated ethereal password
   },
 });
+// let transporter = nodemailer.createTransport({
+//   host: "smtp.zoho.com",
+//   service: "Zoho",
+//   port: 25,
+//   secure: false,
+//   auth: {
+//       user: 'some@email.com',
+//       pass: "123456"
+//   },
+//   tls: {
+//       rejectUnauthorized: false
+//   }
+// });
 
 const clientLogin = async (req, res) => {
   console.log("client login calling for sent email.......");
@@ -99,8 +114,7 @@ const clientLoginWithGoogle = async (req, res) => {
 const clientRegister = async (req, res) => {
   console.log("client register page  calling.......");
 
-  const { fname, dob, gender, email, phone, password, weight, height } =
-    req.body;
+  const { fname, dob, gender, email, phone, password, weight, height } = req.body;
   try {
     const oldUser = await User.findOne({ email });
 

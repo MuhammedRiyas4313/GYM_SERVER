@@ -167,9 +167,7 @@ const addCourse = async (req, res) => {
     if (existCourse)
       return res.json({ status: "Already have a active course !" });
 
-    const cover1 = await cloudinary.uploader.upload(Image1, {
-      folder: "CourseCover",
-    });
+    const cover1 = await cloudinary.uploader.upload(Image1, { folder: "CourseCover" });
 
     const cover2 = await cloudinary.uploader.upload(Image2, {
       folder: "CourseCover",
