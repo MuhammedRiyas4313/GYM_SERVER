@@ -2,6 +2,7 @@ const { Server } = require('socket.io')
 
 function socketConnection(server){
     console.log('socket connection calling')
+    
     const io = new Server(server,{ 
         cors:{
           origin: 'https://master.d3e20f1ck916dk.amplifyapp.com',

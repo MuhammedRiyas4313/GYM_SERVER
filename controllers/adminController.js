@@ -306,6 +306,7 @@ const getUserCount = async (req, res) => {
         },
       },
     ]);
+    console.log(response,'userCount')
     res.json(response);
   } catch (error) {
     res.json({ status: "something went wrong" });

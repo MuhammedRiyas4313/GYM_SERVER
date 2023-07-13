@@ -28,14 +28,14 @@ const { verify } = require("jsonwebtoken");
 
 /* GET users listing. */
 router.post("/login", adminLogin);
-router.get("/trainerslist",verifyTokenAdmin, trainersList);
-router.patch("/trainerblockstatus",verifyTokenAdmin, trainerBlockstatus);
-router.get("/notifications",verifyTokenAdmin, notifications);
-router.get("/trainerdetails",verifyTokenAdmin, trainerDetails);
-router.patch("/verifytrainer",verifyTokenAdmin, verifyTrainer);
-router.get("/clients",verifyTokenAdmin, clientList);
-router.get("/courses",verifyTokenAdmin, courseList);
-router.get("/clientdetails",verifyTokenAdmin, clientDetails);
+router.get("/trainerslist", verifyTokenAdmin, trainersList);
+router.patch("/trainerblockstatus", verifyTokenAdmin, trainerBlockstatus);
+router.get("/notifications", verifyTokenAdmin, notifications);
+router.get("/trainerdetails", verifyTokenAdmin, trainerDetails);
+router.patch("/verifytrainer", verifyTokenAdmin, verifyTrainer);
+router.get("/clients", verifyTokenAdmin, clientList);
+router.get("/courses", verifyTokenAdmin, courseList);
+router.get("/clientdetails", verifyTokenAdmin, clientDetails);
 router.post('/chat',  createConversation);
 router.get('/chat',  getConversation);
 router.get('/chat/user',  getUser);
