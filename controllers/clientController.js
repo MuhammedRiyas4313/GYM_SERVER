@@ -24,14 +24,11 @@ cloudinary.config({
 
 let transporter = nodemailer.createTransport({
   service: process.env.NODEMAILER_SERVICE,
-  secure: false,
   auth: {
-    user: process.env.NODEMAILER_AUTHER, // generated ethereal user
-    pass: process.env.NODEMAILER_AUTHER_PASSWORD, // generated ethereal password
+    user: process.env.NODEMAILER_AUTHER,
+    pass: process.env.NODEMAILER_AUTHER_PASSWORD,
   },
- 
 });
-
 
 const clientLogin = async (req, res) => {
   console.log("client login calling for sent email.......");
